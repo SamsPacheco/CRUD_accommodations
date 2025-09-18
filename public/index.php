@@ -1,33 +1,18 @@
 <?php
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 session_start();
 require __DIR__ . '/../vendor/autoload.php';
 
+use App\Controllers\AccommodationController;
 use App\Controllers\AuthController;
+
+$accommodation = new AccommodationController();
 
 $action = $_GET['action'] ?? 'login';
 $auth = new AuthController();
-
-
-// switch ($action) {
-//     case 'register':
-//         $auth->showRegisterForm();
-//         break;
-//     case 'register_submit':
-//         $auth->register();
-//         break;
-//     case 'login':
-//         $auth->showLoginForm();
-//         break;
-//     case 'login_submit':
-//         $auth->login();
-//         break;
-//     default:
-//         echo "404 - Página no encontrada";
-//         break;
-// }
 
 switch ($action) {
     case 'register':
@@ -56,6 +41,22 @@ switch ($action) {
             include __DIR__ . '/../app/Views/auth/login.php';
         }
         break;
+    
+    case 'accommodation_index':
+        $accommodation->index();
+        break;
+
+    case 'accommodation_create':
+        // GET: mostrar form (protegido por controller)
+        $accommodation->showCreateForm();
+        break;
+
+    case 'accommodation_store':
+        // POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $accommodation->store();
+        }
+        break;
 
     case 'logout':
         $auth->logout();
@@ -63,7 +64,9 @@ switch ($action) {
 
     
     case 'home':
-        include __DIR__ . '/../app/Views/home.php';
+        // include __DIR__ . '/../app/Views/home.php';
+        // break;
+        $accommodation->index();
         break;
     
     default:
