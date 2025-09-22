@@ -15,13 +15,7 @@ use App\Helpers\AuthHelpers;
       <div class="card-body">
         <h4 class="card-title">Crear alojamiento</h4>
 
-        <?php if (!empty($_SESSION['error'])): ?>
-          <div class="alert alert-danger"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
-        <?php endif; ?>
-        <?php if (!empty($_SESSION['success'])): ?>
-          <div class="alert alert-success"><?= $_SESSION['success']; unset($_SESSION['success']); ?></div>
-        <?php endif; ?>
-
+        
         <form method="POST" action="<?= htmlspecialchars($_SERVER['SCRIPT_NAME']) ?>?action=alojamiento_store">
           <div class="mb-3">
             <label class="form-label">Título</label>
@@ -91,6 +85,13 @@ use App\Helpers\AuthHelpers;
       <div class="card-body p-4">
         <h2 class="text-center mb-4">Crear nuevo alojamiento</h2>
         
+        <?php if (!empty($_SESSION['error'])): ?>
+          <div class="alert alert-danger"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
+        <?php endif; ?>
+        <?php if (!empty($_SESSION['success'])): ?>
+          <div class="alert alert-success"><?= $_SESSION['success']; unset($_SESSION['success']); ?></div>
+        <?php endif; ?>
+
         <form action="index.php?action=accommodation_store" method="POST">
           <!-- Título -->
           <div class="mb-3">

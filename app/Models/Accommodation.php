@@ -25,7 +25,7 @@ class Accommodation {
     }
 
     public function getAllAccommodations(){
-        $sql = "SELECT title, description, location, price, state FROM {$this->table}
+        $sql = "SELECT accommodation_id,title, description, location, price, state FROM {$this->table}
                 ORDER BY accommodation_id DESC";
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

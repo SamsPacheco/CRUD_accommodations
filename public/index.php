@@ -8,9 +8,10 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use App\Controllers\AccommodationController;
 use App\Controllers\AuthController;
+use App\Controllers\FavoritesController;
 
 $accommodation = new AccommodationController();
-
+$favoriteController = new FavoritesController();
 $action = $_GET['action'] ?? 'login';
 $auth = new AuthController();
 
@@ -57,21 +58,30 @@ switch ($action) {
             $accommodation->store();
         }
         break;
+        case 'favorites':
+    $favoriteController->index();
+    break;
 
+    case 'add_favorite':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $favoriteController->add();
+        }
+        break;
+
+    case 'remove_favorite':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $favoriteController->remove();
+        }
+        break;
     case 'logout':
         $auth->logout();
         break;
 
-    
     case 'home':
-        // include __DIR__ . '/../app/Views/home.php';
-        // break;
         $accommodation->index();
         break;
     
     default:
-        // include __DIR__ . '/../app/Views/home.php';
-        // break;
         header("Location: ?action=login");
         exit;
 
