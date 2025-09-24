@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Helpers\AuthHelpers;
 use App\Core\Database;
 use App\Models\Accommodation;
+use App\Models\Favorites;
 
 class AccommodationController {
      private $db;
@@ -58,8 +59,20 @@ class AccommodationController {
 
     // GET: lista pública
     public function index(){
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        
         $model = new Accommodation($this->db);
         $accommodation = $model->getAllAccommodations();
+        
+        // Si el usuario está logueado, obtener los IDs de favoritos
+        $favoriteIds = [];
+        if (AuthHelpers::isLogged() && !AuthHelpers::isAdmin()) {
+            $favoritesModel = new Favorites($this->db);
+            $user = AuthHelpers::currentUser();
+            $user_id = (int)$user['user_id'];
+            $favoriteIds = $favoritesModel->getFavoriteIds($user_id);
+        }
+        
         require __DIR__ . '/../Views/home.php';
     }
 }

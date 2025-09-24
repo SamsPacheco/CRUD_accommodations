@@ -37,9 +37,16 @@ class FavoritesController {
             exit;
         }
 
+        // Verificar si el alojamiento ya está en favoritos
+        if ($this->model->isFavorite($user_id, $accomodation_id)) {
+            $_SESSION['error'] = "Este alojamiento ya está en tus favoritos.";
+            header("Location: " . htmlspecialchars($_SERVER['SCRIPT_NAME']) . "?action=home");
+            exit;
+        }
+
         $ok = $this->model->addFavorite($user_id, $accomodation_id);
         $_SESSION['success'] = $ok ? "Guardado en favoritos." : "No se pudo guardar favorito.";
-        header("Location: " . htmlspecialchars($_SERVER['SCRIPT_NAME']) . "?action=favorites");
+        header("Location: " . htmlspecialchars($_SERVER['SCRIPT_NAME']) . "?action=home");
         exit;
     }
 
@@ -61,13 +68,13 @@ class FavoritesController {
         $accomodation_id = (int)($_POST['accomodation_id'] ?? 0);
         if ($accomodation_id <= 0) {
             $_SESSION['error'] = "Alojamiento inválido.";
-            header("Location: " . htmlspecialchars($_SERVER['SCRIPT_NAME']) . "?action=favorites");
+            header("Location: " . htmlspecialchars($_SERVER['SCRIPT_NAME']) . "?action=home");
             exit;
         }
 
         $ok = $this->model->removeFavorite($user_id, $accomodation_id);
         $_SESSION['success'] = $ok ? "Favorito eliminado." : "No se pudo eliminar favorito.";
-        header("Location: " . htmlspecialchars($_SERVER['SCRIPT_NAME']) . "?action=favorites");
+        header("Location: " . htmlspecialchars($_SERVER['SCRIPT_NAME']) . "?action=home");
         exit;
     }
 

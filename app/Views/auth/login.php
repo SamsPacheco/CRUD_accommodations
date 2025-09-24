@@ -64,7 +64,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            margin: 0;
         }
         .login-card {
             max-width: 500px;
@@ -89,6 +90,30 @@
         .text-muted-custom {
             font-size: 0.85rem;
             margin-top: 15px;
+        }
+
+        /* Ajustes responsivos */
+        @media (max-width: 768px) {
+            .login-card {
+                padding: 1rem; /* Reducir padding en móviles */
+                margin: 1rem; /* Margen alrededor del card */
+            }
+            .input-group-text {
+                font-size: 0.9rem; /* Reducir tamaño de íconos en inputs */
+            }
+            .form-label {
+                font-size: 0.9rem; /* Reducir tamaño de etiquetas */
+            }
+            .btn-login {
+                font-size: 0.9rem; /* Reducir tamaño del botón */
+                padding: 0.5rem; /* Ajustar padding del botón */
+            }
+            .text-muted-custom {
+                font-size: 0.75rem; /* Reducir tamaño del texto mutado */
+            }
+            .form-check-label {
+                font-size: 0.9rem; /* Ajustar tamaño de la etiqueta de "Recordarme" */
+            }
         }
     </style>
 </head>
