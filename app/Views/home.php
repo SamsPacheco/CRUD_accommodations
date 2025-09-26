@@ -18,6 +18,11 @@ $user = $_SESSION['user'];
     <style>
         body {
             background-color: #f4f5f7;
+            overflow: hidden;
+        }
+
+        .main_container::-webkit-scrollbar {
+            display: none;
         }
 
         .sidebar {
@@ -26,6 +31,7 @@ $user = $_SESSION['user'];
             border-right: 1px solid #dee2e6;
             padding: 1rem;
             position: relative;
+            height: 100dvh;
         }
 
         .sidebar .nav-link {
@@ -62,19 +68,22 @@ $user = $_SESSION['user'];
             justify-content: center;
             width: 90%;
         }
+
         .btn-outline-red {
-            color: #dc3545; 
-            border-color: #dc3545; 
+            color: #dc3545;
+            border-color: #dc3545;
             background-color: transparent;
         }
+
         .btn-outline-red:hover {
-            color: #fff; 
-            background-color: #f3cdd1ff; 
+            color: #fff;
+            background-color: #f3cdd1ff;
             border-color: #dc3545;
         }
+
         .btn-outline-red[disabled] {
-            color: #e50a24ff; 
-            border-color: #dc3545; 
+            color: #e50a24ff;
+            border-color: #dc3545;
             opacity: 0.65;
             cursor: not-allowed;
             background-color: #f0eeeeff;
@@ -124,9 +133,6 @@ $user = $_SESSION['user'];
                 justify-content: center;
             }
 
-            .main-content {
-                margin-top: 50px;
-            }
 
             .card-body {
                 flex-direction: column;
@@ -189,7 +195,7 @@ $user = $_SESSION['user'];
             </div>
 
             <!-- Main content -->
-            <div class="col-9 col-md-10 p-4 main-content">
+            <div class="col-12 col-md-8 col-lg-10 p-4 main-content overflow-y-auto main_container" style="height: 100dvh;">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h4>Alojamientos</h4>
@@ -200,7 +206,8 @@ $user = $_SESSION['user'];
                 </div>
                 <!-- Card alojamiento -->
                 <?php foreach ($accommodation as $a): ?>
-                    <div class="card card-custom mb-3">
+
+                    <div class="card card-custom mb-3 col-sm-12">
                         <div class="card-body d-flex justify-content-between align-items-start">
                             <div>
                                 <h5 class="card-title mb-1"><?= htmlspecialchars($a['title']) ?></h5>
@@ -231,6 +238,7 @@ $user = $_SESSION['user'];
 
                         </div>
                     </div>
+                    
                 <?php endforeach; ?>
 
             </div>

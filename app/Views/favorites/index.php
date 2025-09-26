@@ -17,8 +17,12 @@ $user = $_SESSION['user'];
     <style>
         body {
             background-color: #f4f5f7;
+            overflow: hidden;
         }
 
+        .main_container::-webkit-scrollbar {
+            display: none;
+        }
         .sidebar {
             height: 100vh;
             background: #fff;
@@ -106,10 +110,6 @@ $user = $_SESSION['user'];
                 justify-content: center;
             }
 
-            .main-content {
-                margin-top: 50px;
-            }
-
             .card-body {
                 flex-direction: column;
                 align-items: flex-start;
@@ -176,7 +176,7 @@ $user = $_SESSION['user'];
             </div>
 
             <!-- Main content -->
-            <div class="col-9 col-md-10 p-4 main-content">
+            <div class="col-12 col-md-8 col-lg-10 p-4 overflow-y-auto main_container" style="height: 100dvh;">
                
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h4>Mis alojamientos favoritos</h4>
@@ -197,7 +197,7 @@ $user = $_SESSION['user'];
                           <p class="text-muted ">
                                     Precio: $<?= htmlspecialchars($a['price']) ?>
                                 </p>
-                                <p class="text-muted position-absolute bottom-0 end-0 px-3 py-2">
+                                <p class="text-muted position-absolute bottom-0 end-0 px-3">
                                     Estado: <?= htmlspecialchars($a['state']) ?>
                                 </p>
                             </div>
